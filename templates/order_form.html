@@ -1,0 +1,458 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nasekovco</title>
+    <style>
+        :root{
+    --bg:#0a0a0a;
+    --card:#171717;
+
+    --gold:#d4af37;
+    --gold-light:#f5d76e;
+
+    --text:#ffffff;
+    --gray:#9ca3af;
+}
+        body{
+            margin:0;
+            background:#0b0b0b;
+            font-family:Arial, sans-serif;
+            overflow-x:hidden;
+        }
+        .form-card{
+    background:linear-gradient(180deg,#171717,#101010);
+    border:1px solid rgba(212,175,55,0.2);
+
+    padding:30px;
+    border-radius:24px;
+
+    color:white;
+
+    width:600px;
+}
+.form-actions{
+
+    display:flex;
+
+    gap:14px;
+
+    margin-top:25px;
+}
+.form-card input,
+.form-card select,
+.form-card textarea{
+    width:100%;
+    padding:12px;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(212,175,55,0.2);
+
+    background:#111;
+    color:white;
+}
+
+.form-card button{
+    background:linear-gradient(135deg,#d4af37,#f5d76e);
+    border:none;
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+    font-weight:bold;
+}
+        /* SIDEBAR */
+.sidebar{
+    width:280px;
+    height:100vh;
+    background:linear-gradient(
+        180deg,
+        #111,
+        #000
+    );
+
+    border-right:2px solid #d4af37;
+
+    position:fixed;
+    left:0;
+    top:0;
+
+    padding:30px 20px;
+
+    box-shadow:
+        0 0 25px rgba(212,175,55,0.25);
+
+    /* АНИМАЦИЯ */
+    transform:translateX(-100%);
+    animation:showSidebar 1s ease forwards;
+}
+
+/* ПОЯВЛЕНИЕ СЛЕВА */
+@keyframes showSidebar{
+    from{
+        transform:translateX(-100%);
+        opacity:0;
+    }
+
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+.gold{
+    color:#d4af37;
+
+    text-shadow:
+        0 0 10px #d4af37,
+        0 0 20px #d4af37;
+}
+
+/* МЕНЮ */
+.menu{
+    list-style:none;
+    padding:0;
+}
+
+.menu li{
+    margin:18px 0;
+}
+
+/* КНОПКИ */
+.menu a{
+    color:#ddd;
+    text-decoration:none;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:15px 18px;
+
+    border-radius:14px;
+
+    transition:0.3s;
+
+    background:rgba(255,255,255,0.03);
+}
+
+/* HOVER */
+.menu a:hover{
+    background:#d4af37;
+    color:black;
+
+    transform:translateX(10px);
+
+    box-shadow:
+        0 0 15px rgba(212,175,55,0.5);
+}
+        /* LOGO */
+.logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:50px;
+}
+
+/* КАРТИНКА ЛОГО */
+.logo img{
+    width:170px;
+
+    object-fit:contain;
+
+    /* СВЕЧЕНИЕ */
+    filter:
+        drop-shadow(0 0 8px rgba(212,175,55,0.7))
+        drop-shadow(0 0 18px rgba(212,175,55,0.5));
+
+    transition:0.4s;
+}
+
+/* ЭФФЕКТ ПРИ НАВЕДЕНИИ */
+.logo img:hover{
+    transform:scale(1.05);
+
+    filter:
+        drop-shadow(0 0 12px rgba(212,175,55,0.9))
+        drop-shadow(0 0 25px rgba(212,175,55,0.7));
+}
+        /* ТЕКСТ СПРАВА */
+.content{
+    position:absolute;
+    overflow-y: auto;
+    left:420px; /* двигает правее */
+    top:40px;
+    height:100vh;
+    width:1000px; /* растягивает в длину */
+    padding:30px;
+    padding-right:80px;
+}
+.btn.save{
+
+    background:linear-gradient(
+        135deg,
+        #d4af37,
+        #f5d76e
+    );
+
+    color:black;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:14px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+.btn.delete{
+
+    background:#2a0b0b;
+
+    color:#ffb4b4;
+
+    text-decoration:none;
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(255,0,0,0.12);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:0.3s;
+}
+.btn.delete:hover{
+
+    background:#7f1d1d;
+
+    color:white;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,0.2);
+}
+.btn.save:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    box-shadow:
+        0 0 20px rgba(212,175,55,0.35),
+        0 0 40px rgba(212,175,55,0.12);
+
+    background:linear-gradient(
+        135deg,
+        #f5d76e,
+        #d4af37
+    );
+}
+.form-card h2{
+
+    color:var(--gold-light);
+
+    margin-bottom:12px;
+
+    text-shadow:
+    0 0 10px rgba(212,175,55,0.15);
+}
+/* СОЦ СЕТИ */
+.sidebar-socials{
+    position:absolute;
+
+    bottom:80px; /* выше */
+
+    left:20px;
+    right:20px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:14px;
+}
+
+/* КНОПКИ */
+.social{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    text-decoration:none;
+
+    color:#ddd;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.03);
+
+    transition:0.3s;
+
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:
+        0 0 10px rgba(212,175,55,0.08);
+}
+
+/* ИКОНКИ */
+.social i{
+    font-size:22px;
+
+    color:#d4af37;
+
+    text-shadow:
+        0 0 10px rgba(212,175,55,0.6);
+}
+
+/* HOVER */
+.social:hover{
+    transform:translateX(6px);
+
+    background:#d4af37;
+
+    color:black;
+
+    box-shadow:
+        0 0 18px rgba(212,175,55,0.35);
+}
+
+.social:hover i{
+    color:black;
+
+    text-shadow:none;
+}
+.form-card input,
+.form-card textarea,
+.form-card select{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:8px;
+    margin-bottom:18px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(212,175,55,0.12);
+
+    background:#111;
+
+    color:white;
+
+    transition:0.35s;
+
+    box-shadow:
+        0 0 10px rgba(212,175,55,0.03);
+}
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus{
+
+    outline:none;
+
+    border-color:#d4af37;
+
+    box-shadow:
+        0 0 15px rgba(212,175,55,0.18),
+        0 0 30px rgba(212,175,55,0.08);
+
+    transform:scale(1.01);
+}
+    </style>
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+
+
+    <a href="http://127.0.0.1:8000/admin" class="logo">
+        <img src="{% static 'logo.png' %}" alt="Logo">
+    </a>
+    <ul class="menu">
+        <li><a href="{% url 'base:home' %}"><i>🏠</i> Главная</a></li>
+        <li><a href="{% url 'base:orders' %}"><i>📦</i> Заказы</a></li>
+        <li><a href="{% url 'base:order_create' %}"><i>➕</i> Новый заказ</a></li>
+    </ul>
+    <!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- СОЦ СЕТИ -->
+<div class="sidebar-socials">
+
+    <a href="https://wa.me/996708609848"
+       target="_blank"
+       class="social">
+
+        <i class="fa-brands fa-whatsapp"></i>
+        +996 708 609 848
+
+    </a>
+
+    <a href="https://t.me/+996708609848"
+       target="_blank"
+       class="social">
+
+        <i class="fa-brands fa-telegram"></i>
+        +996 708 609 848
+
+    </a>
+
+</div>
+
+</div>
+<div class="content">
+<div class="form-card">
+
+    {% if order %}
+        <h2>Редактирование заказа</h2>
+    {% else %}
+        <h2>Создание заказа</h2>
+    {% endif %}
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-actions">
+
+            <button type="submit" class="btn save">
+                💾 Сохранить
+            </button>
+
+            {% if order %}
+                <a href="{% url 'base:order_delete' order.id %}"
+                   class="btn delete">
+
+                    🗑 Удалить
+
+                </a>
+            {% endif %}
+
+        </div>
+
+    </form>
+
+</div>
+</div>
+</body>
+</html>

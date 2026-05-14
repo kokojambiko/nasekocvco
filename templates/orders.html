@@ -1,0 +1,682 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nasekovco</title>
+    <style>
+:root{
+    --bg:#0a0a0a;
+    --card:#171717;
+
+    --gold:#d4af37;
+    --gold-light:#f5d76e;
+
+    --text:#ffffff;
+    --gray:#9ca3af;
+}
+
+body{
+    margin:0;
+    background:#0b0b0b;
+    font-family:Arial, sans-serif;
+    overflow-x:hidden; /* важно */
+}
+
+::-webkit-scrollbar{
+    width:6px;
+}
+
+::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:rgba(212,175,55,0.4);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(10px);
+}
+.layout{
+    display:flex;
+}
+/* SIDEBAR */
+.sidebar{
+    width:280px;
+    height:100vh;
+    background:linear-gradient(
+        180deg,
+        #111,
+        #000
+    );
+
+    border-right:2px solid #d4af37;
+
+    position:fixed;
+    left:0;
+    top:0;
+
+    padding:30px 20px;
+
+    box-shadow:
+        0 0 25px rgba(212,175,55,0.25);
+
+    /* АНИМАЦИЯ */
+    transform:translateX(-100%);
+    animation:showSidebar 1s ease forwards;
+}
+
+/* ПОЯВЛЕНИЕ СЛЕВА */
+@keyframes showSidebar{
+    from{
+        transform:translateX(-100%);
+        opacity:0;
+    }
+
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+.gold{
+    color:#d4af37;
+
+    text-shadow:
+        0 0 10px #d4af37,
+        0 0 20px #d4af37;
+}
+
+/* МЕНЮ */
+.menu{
+    list-style:none;
+    padding:0;
+}
+
+.menu li{
+    margin:18px 0;
+}
+
+/* КНОПКИ */
+.menu a{
+    color:#ddd;
+    text-decoration:none;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:15px 18px;
+
+    border-radius:14px;
+
+    transition:0.3s;
+
+    background:rgba(255,255,255,0.03);
+}
+
+/* HOVER */
+.menu a:hover{
+    background:#d4af37;
+    color:black;
+
+    transform:translateX(10px);
+
+    box-shadow:
+        0 0 15px rgba(212,175,55,0.5);
+}
+        /* LOGO */
+.logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:50px;
+}
+
+/* КАРТИНКА ЛОГО */
+.logo img{
+    width:170px;
+
+    object-fit:contain;
+
+    /* СВЕЧЕНИЕ */
+    filter:
+        drop-shadow(0 0 8px rgba(212,175,55,0.7))
+        drop-shadow(0 0 18px rgba(212,175,55,0.5));
+
+    transition:0.4s;
+}
+
+/* ЭФФЕКТ ПРИ НАВЕДЕНИИ */
+.logo img:hover{
+    transform:scale(1.05);
+
+    filter:
+        drop-shadow(0 0 12px rgba(212,175,55,0.9))
+        drop-shadow(0 0 25px rgba(212,175,55,0.7));
+}
+        /* ТЕКСТ СПРАВА */
+.content{
+    position:absolute;
+    overflow-y: auto;
+    left:420px; /* двигает правее */
+    top:40px;
+    height:100vh;
+    width:1000px; /* растягивает в длину */
+    padding:30px;
+    padding-right:80px;
+    padding-bottom:120px; /* 👈 вот это важно */
+}
+
+/* ЗАГОЛОВОК */
+.content h1{
+    font-size:70px;
+    line-height:1.1;
+
+    color: gray; /* чтобы текст был виден */
+
+    max-width:900px;
+
+    font-weight:700;
+}
+
+.content h1 span{
+    color:#d4af37;
+
+    text-shadow:
+        0 0 10px rgba(212,175,55,0.5);
+}
+
+/* ПОДЗАГОЛОВОК */
+.subtitle{
+    font-size:24px;
+    color:#bbb;
+
+    margin-top:20px;
+
+    max-width:700px;
+
+    line-height:1.5;
+}
+
+/* ТЕКСТ */
+.about{
+    margin-top:40px;
+
+    font-size:18px;
+    color:#999;
+
+    max-width:800px;
+
+    line-height:1.8;
+}
+        .search-form{
+    display:flex;
+    gap:15px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+
+
+
+/* SEARCH */
+
+.search-form{
+    display:flex;
+    gap:15px;
+
+    margin-bottom:30px;
+
+    flex-wrap:wrap;
+}
+
+
+
+/* INPUTS */
+
+.search-form input,
+.search-form select{
+
+    background:#111111;
+
+    border:1px solid rgba(212,175,55,0.15);
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    outline:none;
+
+    min-width:220px;
+
+    transition:0.3s;
+}
+
+
+
+/* GLOW */
+
+.search-form input:focus,
+.search-form select:focus{
+
+    border-color:var(--gold);
+
+    box-shadow:
+    0 0 15px rgba(212,175,55,0.25);
+}
+
+.search-form option{
+    background:rgba(212,175,55,0.4);
+    color:white;
+}
+
+/* BUTTON */
+
+.search-form button{
+
+    background:linear-gradient(
+        135deg,
+        #d4af37,
+        #f5d76e
+    );
+
+    border:none;
+
+    padding:14px 26px;
+
+    border-radius:14px;
+
+    color:black;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+a{
+    text-decoration:none;
+}
+
+/* BUTTON HOVER */
+
+.search-form button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 20px rgba(212,175,55,0.4);
+}
+
+
+
+/* CARDS GRID */
+
+.orders-container{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(320px,1fr));
+
+    gap:22px;
+}
+
+
+
+/* CARD */
+
+.card{
+
+    background:linear-gradient(
+        180deg,
+        #171717,
+        #101010
+    );
+
+    border:1px solid rgba(212,175,55,0.12);
+
+    border-radius:24px;
+
+    padding:22px;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.35);
+}
+
+
+
+/* CARD HOVER */
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:rgba(212,175,55,0.4);
+
+    box-shadow:
+    0 0 30px rgba(212,175,55,0.15);
+}
+
+
+
+/* CLIENT NAME */
+
+.card h2{
+
+    color:var(--gold-light);
+
+    margin-bottom:12px;
+
+    text-shadow:
+    0 0 10px rgba(212,175,55,0.15);
+}
+
+
+
+/* TEXT */
+
+.card p{
+
+    color:#d1d5db;
+
+    margin-top:8px;
+
+    font-size:15px;
+}
+
+
+
+/* STATUS */
+
+.status{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    margin-top:14px;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+
+
+/* COLORS */
+
+.red{
+    background:#7f1d1d;
+    color:#fca5a5;
+}
+.gray{
+    background:#3d0000;
+    color:#6b0000;
+}
+.yellow{
+    background:#78350f;
+    color:#fde68a;
+}
+
+.green{
+    background:#052e16;
+    color:#86efac;
+}
+
+.blue{
+    background:#172554;
+    color:#93c5fd;
+}
+
+
+
+/* EMPTY */
+
+.empty{
+    color:white;
+    background:#171717;
+
+    border-radius:24px;
+
+    padding:50px;
+
+    text-align:center;
+
+    border:1px solid rgba(212,175,55,0.12);
+}
+/* СОЦ СЕТИ */
+.sidebar-socials{
+    position:absolute;
+
+    bottom:80px; /* выше */
+
+    left:20px;
+    right:20px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:14px;
+}
+
+/* КНОПКИ */
+.social{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    text-decoration:none;
+
+    color:#ddd;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.03);
+
+    transition:0.3s;
+
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:
+        0 0 10px rgba(212,175,55,0.08);
+}
+
+/* ИКОНКИ */
+.social i{
+    font-size:22px;
+
+    color:#d4af37;
+
+    text-shadow:
+        0 0 10px rgba(212,175,55,0.6);
+}
+
+/* HOVER */
+.social:hover{
+    transform:translateX(6px);
+
+    background:#d4af37;
+
+    color:black;
+
+    box-shadow:
+        0 0 18px rgba(212,175,55,0.35);
+}
+
+.social:hover i{
+    color:black;
+
+    text-shadow:none;
+}
+    </style>
+</head>
+<body>
+<!-- SIDEBAR -->
+
+<div class="sidebar" id="sidebar">
+
+
+    <a href="http://127.0.0.1:8000/admin" class="logo">
+        <img src="{% static 'logo.png' %}" alt="Logo">
+    </a>
+    <ul class="menu">
+        <li><a href="{% url 'base:home' %}"><i>🏠</i> Главная</a></li>
+        <li><a href="{% url 'base:orders' %}"><i>📦</i> Заказы</a></li>
+        <li><a href="{% url 'base:order_create' %}"><i>➕</i> Новый заказ</a></li>
+    </ul>
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- СОЦ СЕТИ -->
+<div class="sidebar-socials">
+
+    <a href="https://wa.me/996708609848"
+       target="_blank"
+       class="social">
+
+        <i class="fa-brands fa-whatsapp"></i>
+        WhatsApp
+
+    </a>
+
+    <a href="https://t.me/+996708609848"
+       target="_blank"
+       class="social">
+
+        <i class="fa-brands fa-telegram"></i>
+        Telegram
+
+    </a>
+
+</div>
+
+</div>
+<!-- ТЕКСТ СПРАВА -->
+<div class="content">
+
+<form method="GET" class="search-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Поиск клиента или заказа..."
+        value="{{ request.GET.search }}"
+    >
+
+    <select name="status">
+        <option value="">Все статусы</option>
+
+        <option value="new">Новый</option>
+        <option value="progress">В работе</option>
+        <option value="ready">Готов</option>
+        <option value="done">Выдан</option>
+        <option value="cancel">Отменено</option>
+    </select>
+
+    <select name="payment">
+        <option value="">Все оплаты</option>
+
+        <option value="unpaid">Не оплачено</option>
+        <option value="partial">Частично</option>
+        <option value="paid">Оплачено</option>
+    </select>
+
+    <button type="submit">
+        Поиск
+    </button>
+
+</form>
+
+
+
+<div class="orders-container">
+
+{% for order in orders %}
+
+<div class="card">
+
+    <a href="{% url 'base:order_edit' order.id %}" class="card-link">
+
+        <div class="top">
+
+            <div>
+                <h2>{{ order.client_name }}</h2>
+                <p class="type">{{ order.order_type }}</p>
+            </div>
+
+            <div>
+
+                {% if order.status == 'new' %}
+                    <span class="status red">Новый</span>
+
+                {% elif order.status == 'progress' %}
+                    <span class="status yellow">В работе</span>
+
+                {% elif order.status == 'ready' %}
+                    <span class="status green">Готов</span>
+
+                {% elif order.status == 'done' %}
+                    <span class="status blue">Выдан</span>
+
+                {% else %}
+                    <span class="status gray">Отменено</span>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div class="info">
+
+            <p>📞 {{ order.phone }}</p>
+            <p>💰 Сумма: {{ order.total_price }} сом</p>
+            <p>💵 Предоплата: {{ order.prepayment }} сом</p>
+            <p>📌 Остаток: {{ order.remaining }} сом</p>
+
+            <p>
+                💳
+                {% if order.payment_status == 'unpaid' %}
+                    Не оплачено
+                {% elif order.payment_status == 'partial' %}
+                    Частично
+                {% else %}
+                    Оплачено
+                {% endif %}
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
+{% empty %}
+
+<div class="empty">
+
+    <h2>Ничего не найдено</h2>
+
+    <p>Попробуйте изменить поиск</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+</div>
+</body>
+</html>
